@@ -1,0 +1,48 @@
+img {
+  width: 25px;
+  height: auto;
+}
+nav {
+  display: inline;
+}
+
+header {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+}
+
+.header{
+   display: flex;
+   flex-direction: column;
+}
+
+.header nav div{
+   padding: 10px;
+   cursor: pointer;
+}
+
+.header nav div a{
+   color: white;
+   text-decoration: none;
+}
+
+.header nav div:hover{
+   background-color: rgb(19, 18, 18);
+   width: 25px;
+   border-radius: 45px;
+}
+
+.xmain,
+.search,
+.bell-main,
+.letter-main,
+.list-main,
+.flag-main,
+.group-main {
+  margin-bottom: 15px;
+}
+
+.person-main {
+  margin-top: 15px;
+}

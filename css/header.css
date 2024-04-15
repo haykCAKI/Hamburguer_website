@@ -9,12 +9,11 @@ nav {
   display: inline;
 }
 
-header {
+.header {
   background-color: pink;
   color: white;
-  padding: 10px 20px;
-  width: 55px
-  ;
+  padding: 10px 50px;
+  width: 55px;
 }
 
 .header{

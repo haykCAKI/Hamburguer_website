@@ -1,0 +1,53 @@
+p {
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-conteudo {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 45%;
+  margin-left: 400px;
+  margin-top: 24px;
+  color: white;
+  padding: 15px 150px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: pink;
+}
+.header-conteudo .font-header,
+.header-conteudo .settings {
+  flex: 1; 
+}
+.header-conteudo .settings {
+ text-align: right;
+}
+
+.font-header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.font-header:hover h3 {
+   background-color: rgb(19, 18, 18);
+}
+
+.font-header:hover{
+   background-color: rgb(19, 18, 18);
+}
+.settings a {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+}

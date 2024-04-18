@@ -54,12 +54,41 @@ function addToCart(name, price) {
    if (existingItem) {
       //se o item existe, apenas adiciona mais uma quantidade no contador de quantity += 1;
       existingItem.quantity += 1;
-      return;
+   } else {
+      cart.push({
+         name,
+         price,
+         quantity: 1,
+      })
    }
 
-   cart.push({
-      name,
-      price,
-      quantity: 1,
+   updateCartModal()
+}
+
+//Atualizar o carrinho
+function updateCartModal() {
+   cartItemsContainer.innerHTML = "";
+   let total = 0;
+
+   cart.forEach(item => {
+      const cartItemElement = document.createElement("div");
+
+      cartItemElement.innerHTML = `
+         <div>
+            <div>
+               <p>${item.name}</p>
+               <p>${item.quantity}</p>
+               <p>R$${item.price}</p>
+            </div>
+
+            <div>
+               <button>
+                  Remover
+               </button>
+            </div>
+         </div>
+      `
+
+      cartItemsContainer.appendChild(cartItemElement);
    })
 }

@@ -128,3 +128,20 @@ function removerItemCart(name) {
       updateCartModal();
    }
 }
+
+addressInput.addEventListener('input', (event) => {
+   let inputValue = event.target.value;
+
+   if(inputValue !== ""){
+      addressInput.classList.remove("border-red-500");
+      addresWorn.classList.add("hidden");
+   }
+})
+
+checkOut.addEventListener('click', () => {
+   if(cart.length === 0) return;
+   if(addressInput.value === ""){
+      addresWorn.classList.remove("hidden");
+      addressInput.classList.add("border-red-500")
+   }
+})

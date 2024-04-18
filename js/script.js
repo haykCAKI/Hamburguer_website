@@ -49,9 +49,9 @@ menu.addEventListener("click", (event) => {
 //function para adicionar no carrinho
 function addToCart(name, price) {
 
-   const existingItem = cart.find(item => {
+   const existingItem = cart.find(item => 
       item.name === name
-   })
+   )
 
    if (existingItem) {
       //se o item existe, apenas adiciona mais uma quantidade no contador de quantity += 1;
@@ -61,7 +61,7 @@ function addToCart(name, price) {
          name,
          price,
          quantity: 1,
-      })
+      });
    }
 
    updateCartModal()
@@ -71,6 +71,7 @@ function addToCart(name, price) {
 function updateCartModal() {
    cartItemsContainer.innerHTML = "";
    let total = 0;
+   let totalItems = 0;
 
    cart.forEach(item => {
       const cartItemElement = document.createElement("div");
@@ -91,6 +92,7 @@ function updateCartModal() {
          </div>
       `
       total += item.price * item.quantity;
+      totalItems += item.quantity;
 
       cartItemsContainer.appendChild(cartItemElement);
    })
@@ -100,7 +102,7 @@ function updateCartModal() {
       currency: "BRL",
    });
 
-   cartCounter.innerHTML = cart.length;
+   cartCounter.innerHTML = totalItems;
 }
 
 //Função para Remover item do carrinho
@@ -132,7 +134,7 @@ function removerItemCart(name) {
 addressInput.addEventListener('input', (event) => {
    let inputValue = event.target.value;
 
-   if(inputValue !== ""){
+   if (inputValue !== "") {
       addressInput.classList.remove("border-red-500");
       addresWorn.classList.add("hidden");
    }
@@ -142,21 +144,33 @@ addressInput.addEventListener('input', (event) => {
 //Finalizar pedido
 checkOut.addEventListener('click', () => {
 
-   const isOpen = checkRestaurantOpen();
-   if(!isOpen){
-      alert("RESTAURANTE FECHADO NO MOMENTO");
-      return;
-   }
-   if(cart.length === 0) return;
-   if(addressInput.value === ""){
+   //const isOpen = checkRestaurantOpen();
+   //if(!isOpen){
+   // alert("RESTAURANTE FECHADO NO MOMENTO");
+   // return;
+   //}
+   if (cart.length === 0) return;
+   if (addressInput.value === "") {
       addresWorn.classList.remove("hidden");
       addressInput.classList.add("border-red-500")
    }
+
+   //Enviar o pedido para api whats
+   const carItems = cart.map((item) => {
+      return (
+         `${item.name} Quantidade: (${item.quantity}) Preço: R$${item.price} |`
+      )
+   }).join("")
+
+   const message = encodeURIComponent(carItems);
+   const phone = "41992700202"
+
+   window.open(`http://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank")
 })
 
 
 //verificar a hora de manipular o card horario
-function checkRestaurantOpen(){
+function checkRestaurantOpen() {
    const data = new Date();
    const hora = data.getHours();
    return hora >= 18 && hora < 22;
@@ -165,10 +179,10 @@ function checkRestaurantOpen(){
 const spanItem = document.getElementById("date-span");
 const isOpen = checkRestaurantOpen();
 
-if(isOpen){
+if (isOpen) {
    spanItem.classList.remove("bg-red-500");
    spanItem.classList.add("bg-green-600")
-}else{
+} else {
    spanItem.classList.remove("bg-green-500");
    spanItem.classList.add("bg-red-600")
 }

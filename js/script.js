@@ -138,10 +138,37 @@ addressInput.addEventListener('input', (event) => {
    }
 })
 
+
+//Finalizar pedido
 checkOut.addEventListener('click', () => {
+
+   const isOpen = checkRestaurantOpen();
+   if(!isOpen){
+      alert("RESTAURANTE FECHADO NO MOMENTO");
+      return;
+   }
    if(cart.length === 0) return;
    if(addressInput.value === ""){
       addresWorn.classList.remove("hidden");
       addressInput.classList.add("border-red-500")
    }
 })
+
+
+//verificar a hora de manipular o card horario
+function checkRestaurantOpen(){
+   const data = new Date();
+   const hora = data.getHours();
+   return hora >= 18 && hora < 22;
+}
+
+const spanItem = document.getElementById("date-span");
+const isOpen = checkRestaurantOpen();
+
+if(isOpen){
+   spanItem.classList.remove("bg-red-500");
+   spanItem.classList.add("bg-green-600")
+}else{
+   spanItem.classList.remove("bg-green-500");
+   spanItem.classList.add("bg-red-600")
+}

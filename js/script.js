@@ -17,7 +17,7 @@ let cart = [];
 cartBtn.addEventListener('click', () => {
    updateCartModal();
    cartMoral.style.display = "flex";
-   
+
 });
 
 // Fechar o modal quando clicar fora
@@ -84,7 +84,7 @@ function updateCartModal() {
                <p class="font-medium mt-2">R$${item.price.toFixed(2)}</p>
             </div>
 
-            <button>
+            <button class="remove-from-cart-btn" data-name="${item.name}">
                Remover
             </button>
 
@@ -101,4 +101,30 @@ function updateCartModal() {
    });
 
    cartCounter.innerHTML = cart.length;
+}
+
+//Função para Remover item do carrinho
+cartItemsContainer.addEventListener('click', (event) => {
+   if (event.target.classList.contains("remove-from-cart-btn")) {
+      const name = event.target.getAttribute("data-name")
+
+      removerItemCart(name);
+   }
+})
+
+function removerItemCart(name) {
+   const index = cart.findIndex(item => item.name === name);
+
+   if (index !== -1) {
+      const item = cart[index];
+
+      if (item.quantity > 1) {
+         item.quantity -= 1;
+         updateCartModal();
+         return;
+      }
+
+      cart.splice(index, 1);
+      updateCartModal();
+   }
 }

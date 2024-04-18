@@ -49,7 +49,7 @@ menu.addEventListener("click", (event) => {
 //function para adicionar no carrinho
 function addToCart(name, price) {
 
-   const existingItem = cart.find(item => 
+   const existingItem = cart.find(item =>
       item.name === name
    )
 
@@ -144,11 +144,21 @@ addressInput.addEventListener('input', (event) => {
 //Finalizar pedido
 checkOut.addEventListener('click', () => {
 
-   //const isOpen = checkRestaurantOpen();
-   //if(!isOpen){
-   // alert("RESTAURANTE FECHADO NO MOMENTO");
-   // return;
-   //}
+   const isOpen = checkRestaurantOpen();
+   if (!isOpen) {
+      Toastify({
+         text: "O Restaurante está fechado",
+         duration: 3000,
+         close: true,
+         gravity: "top", // `top` or `bottom`
+         position: "right", // `left`, `center` or `right`
+         stopOnFocus: true, // Prevents dismissing of toast on hover
+         style: {
+            background: "#ef4444",
+         },
+      }).showToast();
+      return;
+   }
    if (cart.length === 0) return;
    if (addressInput.value === "") {
       addresWorn.classList.remove("hidden");
@@ -165,7 +175,10 @@ checkOut.addEventListener('click', () => {
    const message = encodeURIComponent(carItems);
    const phone = "41992700202"
 
-   window.open(`http://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank")
+   window.open(`http://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank");
+
+   cart = [];
+   updateCartModal();
 })
 
 

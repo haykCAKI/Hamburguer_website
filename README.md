@@ -8,8 +8,6 @@ This project is a responsive landing page for "Burguer do Toninho," a fictional 
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Credits](#credits)
 
 ## Features
 
